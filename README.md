@@ -76,7 +76,7 @@ El proyecto dispone de un usuario de demostración para que el docente pueda eva
 
 **Contraseña:**
 
-`[CONTRASEÑA DEL USUARIO DEMO]`
+`sgatc01`
 
 Este usuario permite ingresar al sistema y realizar pruebas de las funcionalidades disponibles.
 
