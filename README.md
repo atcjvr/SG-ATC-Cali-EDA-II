@@ -8,6 +8,16 @@ Ingeniería Informática
 Jorge Luis Velásquez Reina  
 Código: 2240590  
 2026
+
+## 📄 Informe final del proyecto
+
+El informe académico contiene la descripción del sistema,
+los objetivos, las estructuras de datos implementadas,
+la arquitectura, las pruebas y las conclusiones.
+
+**[📘 Ver informe final en PDF](docs/Informe_Final_SG_ATC_Cali.pdf)**
+
+
 ## 1. Tecnologías utilizadas
 
 - React
