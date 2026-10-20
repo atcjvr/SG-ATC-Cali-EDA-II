@@ -118,25 +118,7 @@ function Dashboard() {
     }
   }
 
-  // ==========================================
-// RECUPERAR COLA FIFO DESDE POSTGRESQL
-// ==========================================
-
-const pendingRequests = await getPendingRequestsFromDB();
-
-if (!active) return;
-
-// Reconstruir la cola respetando el orden de llegada.
-const existingRequestIds = new Set(
-  manager.getPendingRequests().map((request) => request.id)
-);
-
-for (const request of pendingRequests) {
-  if (!existingRequestIds.has(request.id)) {
-    manager.addRequest(request);
-    existingRequestIds.add(request.id);
-  }
-}
+ 
   // ==========================================
 // RECUPERAR CERTIFICACIÓN DE INGLÉS OACI
 // ==========================================
@@ -238,6 +220,42 @@ for (const training of trainings) {
   }
 }
 }
+ // ==========================================
+// RECUPERAR COLA FIFO DESDE POSTGRESQL
+// ==========================================
+// Mostrar los controladores aunque falle la recuperación FIFO.
+if (active) {
+  refreshData();
+}
+const pendingRequests = await getPendingRequestsFromDB();
+
+if (!active) return;
+
+// Reconstruir la cola respetando el orden de llegada.
+const existingRequestIds = new Set(
+  manager.getPendingRequests().map((request) => request.id)
+);
+
+for (const request of pendingRequests) {
+  if (existingRequestIds.has(request.id)) {
+    continue;
+  }
+
+  const controllerExists = manager
+    .getControllers()
+    .some((controller) => controller.initials === request.initials);
+
+  if (!controllerExists) {
+    console.warn(
+      `Solicitud ${request.id}: el ATC ${request.initials} no está cargado.`
+    );
+    continue;
+  }
+
+  manager.addRequest(request);
+  existingRequestIds.add(request.id);
+}
+
 
       refreshData();
     } catch (error) {
