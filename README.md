@@ -153,7 +153,7 @@ Las variables de entorno de Supabase deben configurarse en Netlify.
 
 **Aplicación publicada:**
 
-[ENLACE DE NETLIFY PENDIENTE]
+[https://sg-atc-cali-eda-ii.netlify.app]
 
 ## 9. Pruebas
 
